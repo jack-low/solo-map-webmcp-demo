@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Solo Map Secure Agent Bus: a WebMCP demo for policy-bound agent handoffs.">
+    <meta name="description" content="PolicyBound Agent Bus: a WebMCP demo for policy-bound agent handoffs.">
     <meta name="theme-color" content="#07111f">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
-    <title>Solo Map — Secure Agent Bus</title>
+    <title>PolicyBound Agent Bus — WebMCP</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="app.js"></script>
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#top" aria-label="Solo Map home">
+      <a class="brand" href="#top" aria-label="PolicyBound Agent Bus home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 40 40" role="img">
             <path d="M8 26.5V14.2a8.2 8.2 0 0 1 8.2-8.2h7.2a8.2 8.2 0 0 1 8.2 8.2v3.1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
@@ -23,7 +23,7 @@
             <path d="m25 10.3 2.1 2.1 4.4-4.8" fill="none" stroke="#25d9d0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <span>SOLO MAP <small>SECURE AGENT BUS</small></span>
+        <span>POLICYBOUND <small>AGENT BUS</small></span>
       </a>
       <div class="topbar-meta"><span class="live-dot"></span> WebMCP prototype</div>
     </header>
@@ -33,7 +33,7 @@
         <div class="hero-copy">
           <p class="eyebrow">PEOPLE + AGENTS, WITH A TRUST BOUNDARY</p>
           <h1>Let agents collaborate without handing the relay your secrets.</h1>
-          <p class="lede">Solo Map turns a sensitive agent handoff into a policy decision first: who may read it, why, for how long, and how many times. WebMCP gives a browser agent a safe, structured way to ask for that plan.</p>
+          <p class="lede">PolicyBound Agent Bus turns a sensitive agent handoff into a policy decision first: who may read it, why, for how long, and how many times. WebMCP gives a browser agent a safe, structured way to ask for that plan.</p>
           <div class="hero-actions">
             <a class="button primary" href="#studio">Try the policy studio <span aria-hidden="true">↘</span></a>
             <a class="button quiet" href="#boundary">See the boundary</a>
@@ -69,7 +69,7 @@
         <div class="section-heading">
           <p class="eyebrow">THE IDEA</p>
           <h2>A secret bus with a narrow public surface.</h2>
-          <p>Traditional agent tools make it easy to call an API. Sensitive workflows need one more question: can this agent use the result for this purpose? Solo Map keeps that decision explicit.</p>
+          <p>Traditional agent tools make it easy to call an API. Sensitive workflows need one more question: can this agent use the result for this purpose? PolicyBound Agent Bus keeps that decision explicit.</p>
         </div>
         <div class="boundary-grid">
           <article class="feature-card"><span class="feature-number">A</span><h3>WebMCP at the edge</h3><p>The page exposes typed tools instead of asking an agent to guess at buttons, fields, or hidden state.</p><code>document.modelContext.registerTool()</code></article>
@@ -135,6 +135,6 @@
       </section>
     </main>
 
-    <footer class="footer shell"><div><span class="brand-text">SOLO MAP</span><span class="footer-muted">Secure Agent Bus · WebMCP prototype</span></div><div class="footer-muted">Built for people and agents that need a boundary.</div></footer>
+    <footer class="footer shell"><div><span class="brand-text">POLICYBOUND</span><span class="footer-muted">Agent Bus · WebMCP prototype</span></div><div class="footer-muted">Built for people and agents that need a boundary.</div></footer>
   </body>
 </html>

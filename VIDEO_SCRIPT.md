@@ -4,7 +4,7 @@ Target length: about 60 seconds. The video is intentionally public-safe: it show
 
 Sensitive agent handoffs fail when a relay, a prompt, or an accidental forwarder can see more than it should.
 
-Solo Map Secure Agent Bus puts policy before payload. This is the public WebMCP demo.
+PolicyBound Agent Bus puts policy before payload. This is the public WebMCP demo.
 
 In a WebMCP-capable browser, the page registers three structured tools: inspect security boundary, list demo agents, and create policy-bound envelope.
 

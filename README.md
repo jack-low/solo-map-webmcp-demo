@@ -1,6 +1,6 @@
-# Solo Map Secure Agent Bus — WebMCP demo
+# PolicyBound Agent Bus — WebMCP demo
 
-Solo Map is a small, privacy-first WebMCP demo for policy-bound agent handoffs. It shows how a browser agent can ask for a structured envelope plan before sensitive data is ever eligible for transport.
+PolicyBound Agent Bus is a small, privacy-first WebMCP demo for policy-bound agent handoffs. It shows how a browser agent can ask for a structured envelope plan before sensitive data is ever eligible for transport.
 
 The public demo deliberately uses synthetic identities and metadata. It does not accept a real secret, create real ciphertext, contact a relay, or contain private keys. The production A2A relay and agent runtimes are separate protected infrastructure.
 
