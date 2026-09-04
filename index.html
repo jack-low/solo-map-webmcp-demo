@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Solo Map Secure Agent Bus: a WebMCP demo for policy-bound agent handoffs.">
+    <meta name="theme-color" content="#07111f">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>Solo Map — Secure Agent Bus</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Solo Map home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img">
+            <path d="M8 26.5V14.2a8.2 8.2 0 0 1 8.2-8.2h7.2a8.2 8.2 0 0 1 8.2 8.2v3.1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M8.2 26.5h6.1l7.4-7.4h8.8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8.2" cy="26.5" r="3.1" fill="#25d9d0" stroke="currentColor" stroke-width="2"/>
+            <circle cx="30.5" cy="19.1" r="3.1" fill="#fff" stroke="currentColor" stroke-width="2"/>
+            <path d="m25 10.3 2.1 2.1 4.4-4.8" fill="none" stroke="#25d9d0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>SOLO MAP <small>SECURE AGENT BUS</small></span>
+      </a>
+      <div class="topbar-meta"><span class="live-dot"></span> WebMCP prototype</div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">PEOPLE + AGENTS, WITH A TRUST BOUNDARY</p>
+          <h1>Let agents collaborate without handing the relay your secrets.</h1>
+          <p class="lede">Solo Map turns a sensitive agent handoff into a policy decision first: who may read it, why, for how long, and how many times. WebMCP gives a browser agent a safe, structured way to ask for that plan.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#studio">Try the policy studio <span aria-hidden="true">↘</span></a>
+            <a class="button quiet" href="#boundary">See the boundary</a>
+          </div>
+          <p class="hero-note"><span class="shield" aria-hidden="true">◈</span> This public demo is preview-only. It never accepts a real secret, key, token, or private endpoint.</p>
+        </div>
+        <div class="hero-art" aria-label="A diagram of a policy engine between an agent and an encrypted relay">
+          <div class="orb orb-a"></div><div class="orb orb-b"></div>
+          <div class="diagram-card">
+            <div class="diagram-row">
+              <div class="node human-node"><span class="node-icon">✦</span><strong>Human / Agent</strong><small>intent</small></div>
+              <span class="arrow">→</span>
+              <div class="node policy-node"><span class="node-icon">✓</span><strong>Policy Engine</strong><small>browser-mediated</small></div>
+            </div>
+            <div class="wire"><span></span><span></span><span></span></div>
+            <div class="diagram-row">
+              <div class="node relay-node"><span class="node-icon">▣</span><strong>Encrypted Relay</strong><small>ciphertext only</small></div>
+              <span class="arrow">→</span>
+              <div class="node agent-node"><span class="node-icon">◎</span><strong>Agent Runtime</strong><small>key stays isolated</small></div>
+            </div>
+            <div class="diagram-caption"><span class="lock">⌁</span> readable only inside an authorized runtime</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics shell" aria-label="Security properties">
+        <div><strong>01</strong><span>Purpose-bound</span><small>Every preview states why access is needed.</small></div>
+        <div><strong>02</strong><span>Time-bounded</span><small>Short-lived expiry is part of the envelope.</small></div>
+        <div><strong>03</strong><span>Key-isolated</span><small>The model never receives a private key.</small></div>
+      </section>
+
+      <section class="boundary shell" id="boundary">
+        <div class="section-heading">
+          <p class="eyebrow">THE IDEA</p>
+          <h2>A secret bus with a narrow public surface.</h2>
+          <p>Traditional agent tools make it easy to call an API. Sensitive workflows need one more question: can this agent use the result for this purpose? Solo Map keeps that decision explicit.</p>
+        </div>
+        <div class="boundary-grid">
+          <article class="feature-card"><span class="feature-number">A</span><h3>WebMCP at the edge</h3><p>The page exposes typed tools instead of asking an agent to guess at buttons, fields, or hidden state.</p><code>document.modelContext.registerTool()</code></article>
+          <article class="feature-card accent"><span class="feature-number">B</span><h3>Policy before payload</h3><p>The first action creates a redacted envelope plan. A relay can route ciphertext without learning the message.</p><code>purpose · expiry · max_reads</code></article>
+          <article class="feature-card"><span class="feature-number">C</span><h3>Runtime owns the key</h3><p>Decryption belongs to an authorized agent runtime and its secure key store, never to the prompt or the relay.</p><code>plaintext_exposed_to_relay: false</code></article>
+        </div>
+      </section>
+
+      <section class="studio shell" id="studio">
+        <div class="studio-heading">
+          <div>
+            <p class="eyebrow">LIVE POLICY STUDIO</p>
+            <h2>Ask an agent to prepare a safe handoff.</h2>
+          </div>
+          <div class="mcp-status" id="mcp-status" role="status"><span class="status-dot"></span><span id="mcp-status-text">Checking WebMCP…</span></div>
+        </div>
+        <div class="studio-grid">
+          <form class="policy-form" id="policy-form">
+            <div class="form-intro"><span class="step">01</span><div><strong>Define the boundary</strong><small>These values become authenticated policy metadata.</small></div></div>
+            <label>Recipient agent
+              <select id="recipient" name="recipient">
+                <option value="agent://demo/accounting">Accounting Agent</option>
+                <option value="agent://demo/legal">Legal Agent</option>
+                <option value="agent://demo/travel">Travel Agent</option>
+              </select>
+            </label>
+            <label>Purpose
+              <select id="purpose" name="purpose">
+                <option value="tax-filing">Tax filing</option>
+                <option value="contract-review">Contract review</option>
+                <option value="travel-booking">Travel booking</option>
+              </select>
+            </label>
+            <div class="form-split">
+              <label>Expires in
+                <select id="expires" name="expires_in_minutes"><option value="30">30 minutes</option><option value="60">1 hour</option><option value="240">4 hours</option></select>
+              </label>
+              <label>Max reads
+                <select id="max-reads" name="max_reads"><option value="1">1 read</option><option value="2">2 reads</option><option value="5">5 reads</option></select>
+              </label>
+            </div>
+            <label class="checkbox-label"><input id="allow-forwarding" type="checkbox"><span>Allow forwarding to another agent</span></label>
+            <button class="button primary full" type="submit">Create policy preview <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote">No network request is made. The preview uses demo identities and synthetic metadata.</p>
+          </form>
+
+          <div class="preview-panel" aria-live="polite">
+            <div class="preview-header"><div><span class="step">02</span><strong>Envelope plan</strong></div><span class="preview-badge" id="preview-badge">WAITING</span></div>
+            <div class="preview-empty" id="preview-empty"><div class="empty-icon">⌁</div><p>Run the policy tool to see a redacted, machine-readable result.</p></div>
+            <pre class="json-preview hidden" id="json-preview"></pre>
+            <div class="preview-footer"><span class="lock">⌁</span><span>Demo mode · ciphertext and keys are never created here</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="agent-surface shell">
+        <div class="agent-copy"><p class="eyebrow">FOR AGENTS</p><h2>Three small tools. One clear contract.</h2><p>In a WebMCP-capable browser, an agent can discover the tools below and call the policy planner with structured arguments. The human UI and the agent surface share the same validation path.</p></div>
+        <div class="tool-list" id="tool-list">
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>inspect_security_boundary</strong><small>Explain what the relay can and cannot see.</small></div><span class="tool-state">ready</span></div>
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>list_demo_agents</strong><small>Return public demo identities and capabilities.</small></div><span class="tool-state">ready</span></div>
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>create_policy_bound_envelope</strong><small>Validate purpose, expiry, reads, and forwarding.</small></div><span class="tool-state">ready</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer shell"><div><span class="brand-text">SOLO MAP</span><span class="footer-muted">Secure Agent Bus · WebMCP prototype</span></div><div class="footer-muted">Built for people and agents that need a boundary.</div></footer>
+  </body>
+</html>
