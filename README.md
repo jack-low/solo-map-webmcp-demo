@@ -14,6 +14,8 @@ python3 -m http.server 4173
 
 Open `http://127.0.0.1:4173/` in a WebMCP-capable browser. The page uses the browser-mediated `document.modelContext.registerTool()` API when available and keeps the same validation logic behind the human UI for preview browsers.
 
+日本語版は [`ja.html`](./ja.html) です。英語版と日本語版は同じWebMCPツールと検証ロジックを共有しています。
+
 ## WebMCP tools
 
 - `inspect_security_boundary` explains the public trust boundary.

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PolicyBound Agent Bus：ポリシーで制御されたエージェント間引き渡しのWebMCPデモ。">
+    <meta name="theme-color" content="#07111f">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+    <link rel="alternate" hreflang="en" href="./index.html">
+    <link rel="alternate" hreflang="ja" href="./ja.html">
+    <title>PolicyBound Agent Bus — WebMCP</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="PolicyBound Agent Bus ホーム">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img">
+            <path d="M8 26.5V14.2a8.2 8.2 0 0 1 8.2-8.2h7.2a8.2 8.2 0 0 1 8.2 8.2v3.1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M8.2 26.5h6.1l7.4-7.4h8.8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8.2" cy="26.5" r="3.1" fill="#25d9d0" stroke="currentColor" stroke-width="2"/>
+            <circle cx="30.5" cy="19.1" r="3.1" fill="#fff" stroke="currentColor" stroke-width="2"/>
+            <path d="m25 10.3 2.1 2.1 4.4-4.8" fill="none" stroke="#25d9d0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>POLICYBOUND <small>AGENT BUS</small></span>
+      </a>
+      <div class="topbar-meta"><span class="live-dot"></span> WebMCP プロトタイプ</div>
+      <nav class="locale-switch" aria-label="言語"><a href="./index.html" lang="en">English</a><span aria-current="page">日本語</span></nav>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">人とエージェント、安全な境界のために</p>
+          <h1>リレーに秘密を渡さず、エージェント同士を協調させる。</h1>
+          <p class="lede">PolicyBound Agent Busは、機密情報のエージェント間引き渡しを、まずポリシー判断に変えます。誰が、何のために、いつまで、何回読めるのか。WebMCPにより、ブラウザ上のエージェントがその計画を構造化して確認できます。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#studio">ポリシースタジオを試す <span aria-hidden="true">↘</span></a>
+            <a class="button quiet" href="#boundary">境界を見る</a>
+          </div>
+          <p class="hero-note"><span class="shield" aria-hidden="true">◈</span> この公開デモはプレビュー専用です。実際の秘密、鍵、トークン、非公開エンドポイントは受け取りません。</p>
+        </div>
+        <div class="hero-art" aria-label="エージェントと暗号化リレーの間にあるポリシーエンジンの図">
+          <div class="orb orb-a"></div><div class="orb orb-b"></div>
+          <div class="diagram-card">
+            <div class="diagram-row">
+              <div class="node human-node"><span class="node-icon">✦</span><strong>人 / エージェント</strong><small>意図</small></div>
+              <span class="arrow">→</span>
+              <div class="node policy-node"><span class="node-icon">✓</span><strong>ポリシーエンジン</strong><small>ブラウザが仲介</small></div>
+            </div>
+            <div class="wire"><span></span><span></span><span></span></div>
+            <div class="diagram-row">
+              <div class="node relay-node"><span class="node-icon">▣</span><strong>暗号化リレー</strong><small>暗号文のみ</small></div>
+              <span class="arrow">→</span>
+              <div class="node agent-node"><span class="node-icon">◎</span><strong>エージェントランタイム</strong><small>鍵は隔離</small></div>
+            </div>
+            <div class="diagram-caption"><span class="lock">⌁</span> 認可済みランタイム内だけで読み取り可能</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics shell" aria-label="セキュリティ特性">
+        <div><strong>01</strong><span>目的に限定</span><small>すべてのプレビューにアクセス目的を表示。</small></div>
+        <div><strong>02</strong><span>時間に限定</span><small>短い有効期限をエンベロープの一部に。</small></div>
+        <div><strong>03</strong><span>鍵を隔離</span><small>モデルが秘密鍵を受け取ることはありません。</small></div>
+      </section>
+
+      <section class="boundary shell" id="boundary">
+        <div class="section-heading">
+          <p class="eyebrow">このアイデア</p>
+          <h2>狭い公開面を持つ、秘密のバス。</h2>
+          <p>従来のエージェントツールはAPIを呼びやすくします。機密ワークフローには、もう一つ問いが必要です。そのエージェントは、許可された目的で結果を使えるのか。PolicyBound Agent Busは、その判断を明示します。</p>
+        </div>
+        <div class="boundary-grid">
+          <article class="feature-card"><span class="feature-number">A</span><h3>境界にWebMCP</h3><p>ボタンや入力欄、隠れた状態を推測させず、型付きツールとして公開します。</p><code>document.modelContext.registerTool()</code></article>
+          <article class="feature-card accent"><span class="feature-number">B</span><h3>ペイロードの前にポリシー</h3><p>最初の操作は秘匿済みのエンベロープ計画を作ります。リレーはメッセージを知らずに暗号文を転送できます。</p><code>purpose · expiry · max_reads</code></article>
+          <article class="feature-card"><span class="feature-number">C</span><h3>ランタイムが鍵を所有</h3><p>復号は認可済みエージェントランタイムと安全な鍵ストアが担当し、プロンプトやリレーには置きません。</p><code>plaintext_exposed_to_relay: false</code></article>
+        </div>
+      </section>
+
+      <section class="studio shell" id="studio">
+        <div class="studio-heading">
+          <div>
+            <p class="eyebrow">ライブポリシースタジオ</p>
+            <h2>エージェントに安全な引き渡しを準備させる。</h2>
+          </div>
+          <div class="mcp-status" id="mcp-status" role="status"><span class="status-dot"></span><span id="mcp-status-text">WebMCPを確認中…</span></div>
+        </div>
+        <div class="studio-grid">
+          <form class="policy-form" id="policy-form">
+            <div class="form-intro"><span class="step">01</span><div><strong>境界を定義</strong><small>これらの値が認証付きポリシーメタデータになります。</small></div></div>
+            <label>宛先エージェント
+              <select id="recipient" name="recipient">
+                <option value="agent://demo/accounting">会計エージェント</option>
+                <option value="agent://demo/legal">法務エージェント</option>
+                <option value="agent://demo/travel">旅行エージェント</option>
+              </select>
+            </label>
+            <label>目的
+              <select id="purpose" name="purpose">
+                <option value="tax-filing">税務申告</option>
+                <option value="contract-review">契約レビュー</option>
+                <option value="travel-booking">旅行予約</option>
+              </select>
+            </label>
+            <div class="form-split">
+              <label>有効期限
+                <select id="expires" name="expires_in_minutes"><option value="30">30分</option><option value="60">1時間</option><option value="240">4時間</option></select>
+              </label>
+              <label>最大読み取り回数
+                <select id="max-reads" name="max_reads"><option value="1">1回</option><option value="2">2回</option><option value="5">5回</option></select>
+              </label>
+            </div>
+            <label class="checkbox-label"><input id="allow-forwarding" type="checkbox"><span>別エージェントへの転送を許可</span></label>
+            <button class="button primary full" type="submit">ポリシープレビューを作成 <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote">ネットワーク通信は行いません。プレビューにはデモ用IDと合成メタデータだけを使います。</p>
+          </form>
+
+          <div class="preview-panel" aria-live="polite">
+            <div class="preview-header"><div><span class="step">02</span><strong>エンベロープ計画</strong></div><span class="preview-badge" id="preview-badge">待機中</span></div>
+            <div class="preview-empty" id="preview-empty"><div class="empty-icon">⌁</div><p>ポリシーツールを実行すると、秘匿済みの機械可読結果を表示します。</p></div>
+            <pre class="json-preview hidden" id="json-preview"></pre>
+            <div class="preview-footer"><span class="lock">⌁</span><span>デモモード · 暗号文と鍵はここでは作成されません</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="agent-surface shell">
+        <div class="agent-copy"><p class="eyebrow">エージェント向け</p><h2>3つの小さなツール。1つの明確な契約。</h2><p>WebMCP対応ブラウザでは、エージェントが下記のツールを発見し、型付き引数でポリシープランナーを呼び出せます。人間向けUIとエージェント面は同じ検証経路を共有します。</p></div>
+        <div class="tool-list" id="tool-list">
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>inspect_security_boundary</strong><small>リレーから見えるもの、見えないものを説明。</small></div><span class="tool-state">ready</span></div>
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>list_demo_agents</strong><small>公開デモのIDと機能を返します。</small></div><span class="tool-state">ready</span></div>
+          <div class="tool-row"><span class="tool-icon">◇</span><div><strong>create_policy_bound_envelope</strong><small>目的、有効期限、読み取り回数、転送を検証。</small></div><span class="tool-state">ready</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer shell"><div><span class="brand-text">POLICYBOUND</span><span class="footer-muted">Agent Bus · WebMCPプロトタイプ</span></div><div class="footer-muted">人とエージェントに明確な境界を。</div></footer>
+  </body>
+</html>
